@@ -15,9 +15,7 @@ const dummyTransactions = [
 ];
 
 
-let transactio
-
-ns = dummyTransactions;
+let transactions = dummyTransactions;
 
 
 
@@ -42,12 +40,61 @@ function addTransactionDOM(tranaction) {
 
 }
 
+// Update the balance, income and expense
+
+function updateValues() {
+  const amount = transactions.map(transaction => transaction.amount);
+
+  const total = amount.reduce((acc, item) => {
+    return acc += item;
+  }, 0).toFixed(2);
+
+  const income = amount
+    .filter(item => item > 0)
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+
+  const expense = (amount
+    .filter(item => item < 0)
+    .reduce((acc, item) => (acc += item), 0)
+    * -1)
+    .toFixed(2);
+
+
+  balance.innerText = `$${total}`;
+  money_plus.innerText = `$${income}`;
+  money_minus.innerText = `$${expense}`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Init app
 
 function init() {
   list.innerHTML = '';
 
   transactions.forEach(addTransactionDOM);
+  updateValues();
 }
 
 init();
