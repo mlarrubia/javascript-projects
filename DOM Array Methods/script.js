@@ -70,8 +70,17 @@ function doubleMoney() {
 }
 
 
+// Sort users by riches
+function sortByRiches() {
+    data.sort((a, b) => {
+        return b.money - a.money;
+    })
+    updateDOM();
+}
+
 
 // Event Listeners
 
 addUserBtn.addEventListener('click', getRandomUser);
 doubleBtn.addEventListener('click', doubleMoney);
+sortBtn.addEventListener('click', sortByRiches);
