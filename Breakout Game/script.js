@@ -120,7 +120,7 @@ function moveBall() {
     // Paddle Collision
     if (
         ball.x - ball.size > paddle.x &&
-        ball.x + ball.size < paddle.x + paddle.w &
+        ball.x + ball.size < paddle.x + paddle.w &&
         ball.y + ball.size > paddle.y
     ) {
         ball.dy = -ball.speed;
@@ -138,12 +138,36 @@ function moveBall() {
                 ) {
                     ball.dy *= -1;
                     brick.visible = false;
+
+                    increaseScore();
                 }
             }
         }
         )
     })
 
+    // Hit bottom wall - Lose
+    if (ball.y + ball.size > canvas.height) {
+        showAllBricks();
+        score = 0;
+    }
+
+}
+
+// Increase Score
+function increaseScore() {
+    score++;
+
+    if (score % (brickRowCount * brickColumnCount) === 0) {
+        showAllBricks();
+    }
+}
+
+// Make all bricks appear
+function showAllBricks() {
+    bricks.forEach(column => {
+        column.forEach(brick => brick.visible = true);
+    })
 }
 
 // Draw Everything
