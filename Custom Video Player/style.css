@@ -62,6 +62,32 @@ h1 {
     color: #fff;
 }
 
+.controls .fa-volume-up {
+    color: #777;
+}
+
+.controls .fa-volume-off {
+    color: #777;
+}
+
+#sound {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#volume {
+    position: absolute;
+    width: 80px;
+    top: -60px;
+    left: -25px;
+    transform: rotate(270deg);
+}
+
+
+
+
+
 .controls .timestamp {
     color: #fff;
     font-weight: bold;
@@ -73,6 +99,11 @@ h1 {
     outline: 0;
 }
 
+
+/* Custom style */
+.hide {
+    display: none;
+}
 
 @media(max-width: 800px) {
 

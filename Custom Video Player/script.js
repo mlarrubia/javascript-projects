@@ -3,11 +3,15 @@ const play = document.getElementById('play');
 const stop = document.getElementById('stop');
 const progress = document.getElementById('progress');
 const timestamp = document.getElementById('timestamp');
+const sound = document.getElementById('sound');
+const volume = document.getElementById('volume');
 
+video.currentTime = 0;
 // Play and Pause video
 function toggleVideoStatus() {
     if (video.paused) {
         video.play()
+        video.volume = .5;
     } else {
         video.pause();
     }
@@ -49,6 +53,25 @@ function setVideoProgress() {
     video.currentTime = (+progress.value * video.duration) / 100;
 }
 
+function updateSound() {
+    volume.classList.toggle('hide');
+    video.volume = volume.value;
+    console.log(video.volume)
+    console.log(volume.value)
+    if (video.volume == 0) {
+        sound.innerHTML =
+            `
+        <i class="fa fa-volume-off fa-2x"></i>
+        <input type="range" id="volume" class="volume" min="0" max="1" step="0.1" value="${video.volume}">
+        `
+    }
+    else {
+        `
+        "fa fa-volume-up fa-2x"></i>
+        <input type="range" id="volume" class="volume" min="0" max="1" step="0.1" value="${video.volume}">
+        `
+    }
+}
 
 
 
@@ -64,3 +87,5 @@ video.addEventListener('timeupdate', updateProgress);
 play.addEventListener('click', toggleVideoStatus);
 stop.addEventListener('click', stopVideo);
 progress.addEventListener('click', setVideoProgress);
+
+sound.addEventListener('click', updateSound);
