@@ -20,8 +20,6 @@ async function getPosts() {
 
 
 // Show Posts in DOM
-
-
 async function showPosts() {
     const posts = await getPosts();
 
@@ -54,6 +52,26 @@ function showLoading() {
     }, 1000);
 }
 
+// Filter Post by Input
+function filterPosts(e) {
+
+    const term = e.target.value.toUpperCase();
+    const posts = document.querySelectorAll('.post');
+
+    posts.forEach(post => {
+        const title = post.querySelector('.post-title').innerText.toUpperCase();
+        const body = post.querySelector('.post-body').innerText.toUpperCase();
+
+        if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
+            post.style.display = 'flex';
+        }
+        else {
+            post.style.display = 'none';
+        }
+    })
+
+
+}
 
 showPosts();
 
@@ -67,6 +85,7 @@ window.addEventListener('scroll', () => {
     if (scrollTop + clientHeight >= scrollHeight - 5) {
         showLoading();
     }
-
-
 })
+
+
+filter.addEventListener('input', filterPosts);
