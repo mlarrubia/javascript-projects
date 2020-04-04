@@ -28,7 +28,7 @@ function createList() {
         .map(a => ({ value: a, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .forEach((person, index) => {
-            console.log(person)
+            // console.log(person)
             const listItem = document.createElement('li');
             console.log(listItem);
             listItem.setAttribute('data-index', index);
@@ -73,12 +73,28 @@ function dragDrop() {
     this.classList.remove('over');
 }
 
+// Swap Listitems that are drag and drop
 function swapItems(fromIndex, toIndex) {
     const itemOne = listItems[fromIndex].querySelector('.draggable');
     const itemTwo = listItems[toIndex].querySelector('.draggable');
 
     listItems[fromIndex].appendChild(itemTwo);
     listItems[toIndex].appendChild(itemOne);
+}
+
+// check the order of list items
+function checkOrder() {
+    listItems.forEach((item, index) => {
+        const personName = item.querySelector('.draggable').innerText.trim();
+
+        if (personName !== richestPeople[index]) {
+            item.classList.add('wrong')
+        }
+        else {
+            item.classList.remove('wrong')
+            item.classList.add('right')
+        }
+    })
 }
 
 
@@ -101,3 +117,6 @@ function addEventListeners() {
     })
 
 }
+
+
+check.addEventListener('click', checkOrder);

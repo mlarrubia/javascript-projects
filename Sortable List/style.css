@@ -21,6 +21,15 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+.draggable {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    flex: 1;
+}
+
 .draggable-list {
     border: 1px solid var(--border-color);
     color: var(--text-color);
