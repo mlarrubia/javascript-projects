@@ -25,7 +25,10 @@ createList();
 //  Insert list items into DOM
 function createList() {
     [...richestPeople]
+        .map(a => ({ value: a, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
         .forEach((person, index) => {
+            console.log(person)
             const listItem = document.createElement('li');
             console.log(listItem);
             listItem.setAttribute('data-index', index);
@@ -33,7 +36,7 @@ function createList() {
             listItem.innerHTML = `
                 <span class="number">${index + 1}</span>
                 <div class="draggable" draggable="true">
-                    <p class="person-name">${person}</p>
+                    <p class="person-name">${person.value}</p>
                     <i class="fa fa-grip-lines"></i>
                 </div>
             `;
